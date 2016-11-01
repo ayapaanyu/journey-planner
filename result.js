@@ -66,20 +66,20 @@ function ajaxRequest(url_api){
                   '</table></div>'+
                   '<div class="panel-body">';
                     $.each(response.journeys[i].legs,function(t){
-                      journey += '<table class="table"><tr><td>' +response.journeys[i].legs[t].duration+ '</td>'+
+                      journey += '<table class="table"><tbody><tr><td>' +response.journeys[i].legs[t].duration+ '</td>'+
                                 '<td>' +response.journeys[i].legs[t].departurePoint.commonName+ '</td>'+
                                 '<td' +response.journeys[i].legs[t].arrivalPoint.commonName+ '</td>'+
                                 '<td' +response.journeys[i].legs[t].instruction.summary+ '</td></tr></tbody></table>';
                     });
-                    journey += '</tbody></table</div><br>';
+                    journey += '</table</div><br>';
                 result.append(journey);
                 }); 
             var status = '<div class="panel panel-default">'+
                     '<p><span class="glyphicon glyphicon-info-sign"></span><b>Status Update</b></p>';
             $.each(response.lines,function(line){    
                    status += '<p>' +response.lines[line].name+ ':' +
-                       //$.each(response.lines[line].lineStatuses,function(){    
-                       '</span>' + response.lines[line].lineStatuses[0].StatusSeverityDescription+ '</span>';//});
+                       $.each(response.lines[line].lineStatuses,function(stat){    
+                       '</span>' + response.lines[line].lineStatuses[stat].StatusSeverityDescription+ '</span>';});
                    status +='</p>';
                         });
             status += '</div>';        
